@@ -1,0 +1,255 @@
+/*
+  Stile generale del progetto
+  ===========================
+
+  Questo file contiene gli stili globali dell'applicazione, cioè le regole
+  CSS che si applicano a tutta l'app (reset, tipografia di base, variabili,
+  utility personalizzate, ecc.).
+
+  Viene importato una sola volta in `src/main.jsx` e ha effetto su tutti i
+  componenti. Per stili specifici di un singolo componente è preferibile
+  usare un CSS Module (es. `NomeComponente.module.css`).
+
+  Il tema (chiaro/scuro) è gestito da `src/contexts/ThemeContext.jsx`,
+  che imposta l'attributo `data-bs-theme` su <html>. Bootstrap legge
+  quell'attributo e scambia le sue variabili `--bs-*`: qui sotto le
+  sovrascriviamo con la palette Omnidex, scoped per tema.
+  Le regole sono scritte DOPO Bootstrap (vedi `src/main.jsx`), quindi a
+  parità di specificità vincono loro.
+*/
+
+/* ==========================================================================
+  1. Font retro 8-bit
+  ========================================================================== */
+
+:root {
+  --od-font-pixel: "Press Start 2P", monospace;
+  --od-font-terminal: "VT323", monospace;
+
+  /* Palette Omnidex (viola) */
+  --od-violet-50: #faf8ff;
+  --od-violet-100: #f3eeff;
+  --od-violet-200: #e0d6f7;
+  --od-violet-400: #a780ff;
+  --od-violet-500: #8b46ff;
+  --od-violet-600: #7c3aed;
+  --od-violet-700: #6a25e0;
+  --od-violet-800: #5b16cf;
+  --od-violet-900: #241146;
+  --od-ink: #150b2e;
+
+  /* Corpo del testo: terminale retro */
+  --bs-body-font-family: var(--od-font-terminal);
+  --bs-body-font-size: 1.2rem;
+  --bs-body-line-height: 1.6;
+}
+
+body {
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  line-height: var(--bs-body-line-height);
+}
+
+/* Titoli e brand: carattere a blocchi 8-bit.
+  Press Start 2P è molto largo e "alto": le dimensioni di default di
+  Bootstrap vanno ridotte, altrimenti i titoli escono dal contenitore. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--od-font-pixel);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+h1 { font-size: clamp(1.25rem, 3.5vw, 1.75rem); }
+h2 { font-size: clamp(1.05rem, 2.8vw, 1.35rem); }
+h3 { font-size: 1.1rem; }
+h4 { font-size: 0.95rem; }
+h5 { font-size: 0.85rem; }
+h6 { font-size: 0.78rem; }
+
+.navbar {
+  --bs-navbar-brand-font-size: 0.95rem;
+}
+
+.navbar-brand,
+.btn {
+  font-family: var(--od-font-pixel);
+}
+
+.btn {
+  --bs-btn-font-size: 0.75rem;
+  --bs-btn-padding-x: 0.9rem;
+  --bs-btn-padding-y: 0.65rem;
+}
+
+/* Dettagli retro */
+::selection {
+  background: var(--od-violet-500);
+  color: #fff;
+}
+
+img {
+  image-rendering: auto;
+}
+
+/* ==========================================================================
+  2. Tema CHIARO — palette Omnidex
+   ========================================================================== */
+
+[data-bs-theme="light"] {
+  color-scheme: light;
+
+  --bs-body-bg: var(--od-violet-50);
+  --bs-body-bg-rgb: 250, 248, 255;
+  --bs-body-color: #241a3d;
+  --bs-body-color-rgb: 36, 26, 61;
+
+  --bs-emphasis-color: var(--od-ink);
+  --bs-emphasis-color-rgb: 21, 11, 46;
+
+  --bs-secondary-color: rgba(36, 26, 61, 0.75);
+  --bs-secondary-color-rgb: 90, 70, 140;
+  --bs-secondary-bg: #f0ebff;
+  --bs-secondary-bg-rgb: 240, 235, 255;
+
+  --bs-tertiary-color: rgba(36, 26, 61, 0.55);
+  --bs-tertiary-color-rgb: 36, 26, 61;
+  --bs-tertiary-bg: var(--od-violet-100);
+  --bs-tertiary-bg-rgb: 243, 238, 255;
+
+  --bs-heading-color: var(--od-ink);
+
+  --bs-link-color: var(--od-violet-600);
+  --bs-link-color-rgb: 124, 58, 237;
+  --bs-link-hover-color: var(--od-violet-800);
+  --bs-link-hover-color-rgb: 91, 22, 207;
+
+  --bs-code-color: #9333ea;
+  --bs-highlight-bg: #efe7ff;
+  --bs-highlight-color: var(--od-ink);
+
+  --bs-border-color: var(--od-violet-200);
+  --bs-border-color-translucent: rgba(36, 26, 61, 0.175);
+  --bs-box-shadow: 0 0.5rem 1rem rgba(60, 20, 140, 0.12);
+  --bs-focus-ring-color: rgba(124, 58, 237, 0.3);
+
+  --bs-primary: var(--od-violet-600);
+  --bs-primary-rgb: 124, 58, 237;
+  --bs-primary-text-emphasis: var(--od-violet-800);
+  --bs-primary-bg-subtle: #efe7ff;
+  --bs-primary-border-subtle: #d5c3ff;
+}
+
+/* ==========================================================================
+  3. Tema SCURO — stessa palette, valori più luminosi
+  ========================================================================== */
+
+[data-bs-theme="dark"] {
+  color-scheme: dark;
+
+  --bs-body-bg: #120a26;
+  --bs-body-bg-rgb: 18, 10, 38;
+  --bs-body-color: #e9e2ff;
+  --bs-body-color-rgb: 233, 226, 255;
+
+  --bs-emphasis-color: #ffffff;
+  --bs-emphasis-color-rgb: 255, 255, 255;
+
+  --bs-secondary-color: rgba(233, 226, 255, 0.75);
+  --bs-secondary-color-rgb: 190, 175, 235;
+  --bs-secondary-bg: #1d1240;
+  --bs-secondary-bg-rgb: 29, 18, 64;
+
+  --bs-tertiary-color: rgba(233, 226, 255, 0.55);
+  --bs-tertiary-color-rgb: 233, 226, 255;
+  --bs-tertiary-bg: #1a1035;
+  --bs-tertiary-bg-rgb: 26, 16, 53;
+
+  --bs-heading-color: #f6f1ff;
+
+  --bs-link-color: #c1a2ff;
+  --bs-link-color-rgb: 193, 162, 255;
+  --bs-link-hover-color: #e6dcff;
+  --bs-link-hover-color-rgb: 230, 220, 255;
+
+  --bs-code-color: #e0b3ff;
+  --bs-highlight-bg: #3a1f7a;
+  --bs-highlight-color: #f6f1ff;
+
+  --bs-border-color: #35265f;
+  --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
+  --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
+  --bs-focus-ring-color: rgba(167, 128, 255, 0.35);
+
+  --bs-primary: var(--od-violet-400);
+  --bs-primary-rgb: 167, 128, 255;
+  --bs-primary-text-emphasis: #c4a6ff;
+  --bs-primary-bg-subtle: var(--od-violet-900);
+  --bs-primary-border-subtle: #45277f;
+}
+
+/* ==========================================================================
+  4. Bottoni
+  Bootstrap compila `.btn-primary` con valori fissi (non usa var(--bs-primary)),
+  quindi vanno sovrascritti direttamente qui.
+   ========================================================================== */
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--od-violet-600);
+  --bs-btn-border-color: var(--od-violet-600);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--od-violet-700);
+  --bs-btn-hover-border-color: var(--od-violet-700);
+  --bs-btn-focus-shadow-rgb: 124, 58, 237;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--od-violet-800);
+  --bs-btn-active-border-color: var(--od-violet-800);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #b79bff;
+  --bs-btn-disabled-border-color: #b79bff;
+}
+
+[data-bs-theme="dark"] .btn-primary {
+  --bs-btn-bg: var(--od-violet-400);
+  --bs-btn-border-color: var(--od-violet-400);
+  --bs-btn-hover-bg: #b07dff;
+  --bs-btn-hover-border-color: #b07dff;
+  --bs-btn-focus-shadow-rgb: 167, 128, 255;
+  --bs-btn-active-bg: var(--od-violet-500);
+  --bs-btn-active-border-color: var(--od-violet-500);
+  --bs-btn-color: #150b2e;
+  --bs-btn-hover-color: #150b2e;
+  --bs-btn-active-color: #150b2e;
+  --bs-btn-disabled-bg: #5c3aa8;
+  --bs-btn-disabled-border-color: #5c3aa8;
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: #4a3a75;
+  --bs-btn-border-color: #b9a3f5;
+  --bs-btn-hover-color: var(--od-violet-800);
+  --bs-btn-hover-bg: #efe7ff;
+  --bs-btn-hover-border-color: var(--od-violet-600);
+  --bs-btn-focus-shadow-rgb: 185, 163, 245;
+  --bs-btn-active-color: var(--od-violet-800);
+  --bs-btn-active-bg: #e3d7ff;
+  --bs-btn-active-border-color: #9a7bf0;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary {
+  --bs-btn-color: #d9ccff;
+  --bs-btn-border-color: #5a44a0;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--od-violet-900);
+  --bs-btn-hover-border-color: var(--od-violet-400);
+  --bs-btn-focus-shadow-rgb: 90, 68, 160;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #2f1a5c;
+  --bs-btn-active-border-color: #b07dff;
+}
