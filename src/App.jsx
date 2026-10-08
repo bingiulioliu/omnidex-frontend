@@ -3,6 +3,10 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
+import Relics from "./pages/Relics";
+import About from "./pages/About";
+
+
 
 function App() {
   return (
@@ -11,6 +15,8 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
+            <Route path="/relics" element={<Relics />} /> 
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
