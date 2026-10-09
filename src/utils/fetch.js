@@ -22,7 +22,7 @@ export async function fetchRelics () {
 // Fetch reliquia singola
 export async function fetchRelicById(id) {
     try {
-        const response = await fetch(`API_URL/${id}`)
+        const response = await fetch(`${API_URL}/${id}`)
 
         if (!response.ok){
             throw new Error (`Errore recupero reliquia con id ${id}`)
