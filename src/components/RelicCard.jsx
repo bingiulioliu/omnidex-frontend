@@ -5,7 +5,7 @@ export function RelicCard({relic}){
             {/* Immagine */}
             <div className="ratio ratio-4x3 bg-body-secondary border-bottom">
                 {relic.imgUrl &&(
-                    <img src={relic.imgUrl} alt={relic.name} className="object-fit-contain p-3"></img>
+                    <img src={`${import.meta.env.VITE_API_IMG_URL}${relic.imgUrl}`} alt={relic.name} className="object-fit-contain p-3"></img>
                 )}
             </div>
 

@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import Relics from "./pages/Relics";
 import About from "./pages/About";
+import { SingleRelic } from "./pages/SingleRelic";
 
 
 
@@ -16,6 +17,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/relics" element={<Relics />} /> 
+            <Route path="/relics/:id" element={<SingleRelic />} /> 
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Route>
