@@ -11,7 +11,7 @@ export async function fetchRelics () {
 
         const data = await response.json();
         console.log('Reliquie:', data);
-        return data.results;
+        return data;
 
     } catch (error) {
         console.error('Errore', error);
@@ -32,7 +32,7 @@ export async function fetchRelicById(id) {
 
         console.log('Prodotto singolo: ', data);
         
-        return data.results;
+        return data;
 
     } catch (error){
         console.error('Errore'. error);

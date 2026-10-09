@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { fetchRelicById, fetchRelics } from "../utils/fetch";
+import { RelicList } from "../components/RelicList";
 
 function Relics() {
-    const {relics, setRelics} = useState(null);
-    const {relic, setRelic} = useState(null);
+    const [relics, setRelics] = useState(null);
+    const [relic, setRelic] = useState(null);
 
     useEffect(() => {
         fetchRelics()
@@ -13,15 +14,18 @@ function Relics() {
 
     useEffect(() => {
         fetchRelicById(1)
-        .then(setRelics);
+        .then(setRelic);
     }, [])
 
+    if (relics === null)
+        return <p>Stiamo recuperando le reliquie...</p>;
 
 
     return <>
         <h1>Pagina reliquie</h1>
-        <pre>{JSON.stringify(relics,null,2)}</pre>
-        <pre>{JSON.stringify(relic,null,2)}</pre>
+
+        <RelicList relics={relics}/>
+
     </>;
 }
 export default Relics;
