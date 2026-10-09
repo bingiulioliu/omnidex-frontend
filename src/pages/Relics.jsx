@@ -5,16 +5,10 @@ import { RelicList } from "../components/RelicList";
 
 function Relics() {
     const [relics, setRelics] = useState(null);
-    const [relic, setRelic] = useState(null);
 
     useEffect(() => {
         fetchRelics()
         .then(setRelics);
-    }, [])
-
-    useEffect(() => {
-        fetchRelicById(1)
-        .then(setRelic);
     }, [])
 
     if (relics === null)
