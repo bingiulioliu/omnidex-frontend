@@ -25,12 +25,12 @@ export function RelicDetail({relic}){
                 <h1 className="mb-3">{relic.name}</h1>
 
                 {relic.categories.length > 0 && (
-                    <ul className="list-inline mb-0">
-                        {relic.categories.map(category =>{
+                    <ul className="list-inline mb-3">
+                        {relic.categories.map(category =>(
                             <li className="list-inline-item" key={category.id}>
                                 <span className="badge text-bg-secondary">{category.name}</span>
                             </li>
-                        })}
+                        ))}
                     </ul>
                 )}
 
