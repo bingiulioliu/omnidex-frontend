@@ -24,8 +24,6 @@ export function RelicDetail({relic}){
 
                 <h1 className="mb-3">{relic.name}</h1>
 
-                <p className="text-secondary">{relic.description}</p>
-
                 {relic.categories.length > 0 && (
                     <ul className="list-inline mb-0">
                         {relic.categories.map(category =>{
@@ -36,7 +34,7 @@ export function RelicDetail({relic}){
                     </ul>
                 )}
 
-                
+                <p className="text-secondary">{relic.description}</p>
 
             </div>
         </div>

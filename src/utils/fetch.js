@@ -1,12 +1,23 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 // Fetch per tutte le reliquie
-export async function fetchRelics () {
+// name coincide con name passato nel Service in back
+export async function fetchRelics (name = "") {
     try {
-        const response = await fetch(API_URL);
+        const params = new URLSearchParams();
+        if (name.trim()){
+            params.set("name", name.trim());
+        }
+
+        const query = params.toString();
+        // Se abbiamo le query abbiamo api_url?query
+        // altrimenti solo api_url
+        const url = query ? `${API_URL}?${query}` : API_URL;
+
+        const response = await fetch(url);
 
         if (!response.ok){
-            throw new Error('Errore recupero reliquie')
+            throw new Error(`Errore recupero reliquie: ${response.status}`)
         }
 
         const data = await response.json();
