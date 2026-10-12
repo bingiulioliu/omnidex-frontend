@@ -46,7 +46,7 @@ export async function fetchRelicById(id) {
         return data;
 
     } catch (error){
-        console.error('Errore'. error);
+        console.error('Errore', error);
         return null;
     }
 };

@@ -8,21 +8,28 @@ export function SingleRelic(){
 
     const {id} = useParams();
     const [relic, setRelic] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true)
         fetchRelicById(id)
-        .then(setRelic);
+        .then(setRelic)
+        .finally(() => setIsLoading(false));
     }, [id])
-
-    if (relic === null)
-        return <p>Stiamo caricando la reliquia...</p>
 
 
     return <>
-        <h1>Dettaglio reliquia</h1>
+        <h1>Dettaglio {relic?.name}</h1>
         <Link to="/relics" className="btn btn-outline-secondary align-self-start mt-3 mb-3">
             Torna alle reliquie
         </Link>
-        <RelicDetail relic={relic}/>
+
+        {isLoading ? (
+            <p>Stiamo recuperando la reliquia...</p>
+        ) : relic === null ? (
+            <p>Errore di comunicazione col Server. Riprova</p>
+        ) : (
+            <RelicDetail relic={relic}/>
+        )}
     </>
 }
