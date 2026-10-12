@@ -1,6 +1,6 @@
 export function RelicCard({relic}){
     return <>
-        <article className="card h-100 bg-body-tertiary border">
+        <article className="card h-100 bg-body-tertiary border relic-card">
 
             {/* Immagine */}
             <div className="ratio ratio-4x3 bg-body-secondary border-bottom">
