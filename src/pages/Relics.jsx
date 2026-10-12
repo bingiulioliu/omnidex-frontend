@@ -6,31 +6,42 @@ import { useSearchParams } from "react-router";
 
 function Relics() {
     const [relics, setRelics] = useState(null);
-    const [params, setParams] = useSearchParams()
+    const [isLoading, setIsLoading] = useState(true);
+    const [params, setParams] = useSearchParams();
     const query = params.get("name") ?? "";
 
     useEffect(() => {
+        setIsLoading(true);
         fetchRelics(query)
-        .then(setRelics);
+            .then(setRelics)
+            .finally(() => setIsLoading(false));
     }, [query])
 
-    if (relics === null)
-        return <p>Stiamo recuperando le reliquie...</p>;
-
-
     return <>
-        <h1>Pagina reliquie</h1>
+        <div className="d-flex justify-content-around">
+            <p className="lead text-secondary mb-3">
+                Elenco completo delle reliquie filtrabili per nome
+            </p>
+            <p className="text-secondary mb-3">
+                {relics?.length ? `${relics.length} reliquie disponibili` : ""}
+            </p>
+        </div>
 
-        <input 
+        <input
             type="search"
             placeholder="Cerca il nome della reliquia"
             className="form-control mb-3"
             value={query}
-            onChange={event => setParams(event.target.value ? {name: event.target.value} : {}, {replace: true})}
+            onChange={event => setParams(event.target.value ? { name: event.target.value } : {}, { replace: true })}
         />
 
-        <RelicList relics={relics}/>
-
+        {isLoading ? (
+            <p>Stiamo recuperando le reliquie...</p>
+        ) : relics === null ? (
+            <p>Errore di comunicazione col Server. Riprova.</p>
+        ) : (
+            <RelicList relics={relics} />
+        )}
     </>;
 }
 export default Relics;

@@ -1,5 +1,3 @@
-import { Link } from "react-router"
-
 export function RelicDetail({relic}){
 
     return <>
