@@ -1,17 +1,27 @@
-export function RelicCard({relic}){
+import { useState } from "react";
+
+export function RelicCard({ relic }) {
+
+    const [imgError, setImgError] = useState(false);
+
     return <>
         <article className="card h-100 bg-body-tertiary border relic-card">
 
             {/* Immagine */}
             <div className="ratio ratio-4x3 bg-body-secondary border-bottom">
-                {relic.imgUrl &&(
-                    <img src={`${import.meta.env.VITE_API_IMG_URL}${relic.imgUrl}`} alt={relic.name} className="object-fit-contain p-3"></img>
-                )}
+                {relic.imgUrl && !imgError ? (
+                    <img
+                        src={`${import.meta.env.VITE_API_IMG_URL}${relic.imgUrl}`}
+                        alt={relic.name}
+                        className="object-fit-contain p-3"
+                        onError={() => setImgError(true)}/>
+                ) : (
+                    <p>Immagine non disponibile</p>)}
             </div>
 
             {/* Corpo card */}
             <div className="card-body d-flex flex-column">
-                {relic.universe?.name &&(
+                {relic.universe?.name && (
                     <span className="badge text-bg-primary align-self-start mb-2 text-uppercase">
                         {relic.universe.name}
                     </span>

@@ -1,14 +1,21 @@
+import { useState } from "react";
+
 export function RelicDetail({relic}){
+
+    const [imgError, setImgError] = useState(false); 
 
     return <>
         <div className="row g-4">
 
             <div className="col-12 col-md-5">
                 <div className="ratio ratio-1x1 bg-body-tertiary border rounded">
-                    {relic.imgUrl ? (
-                        <img src={`${import.meta.env.VITE_API_IMG_URL}${relic.imgUrl}`}/>
+                    {relic.imgUrl && !imgError ? (
+                        <img 
+                            src={`${import.meta.env.VITE_API_IMG_URL}${relic.imgUrl}`}
+                            alt={relic.name}
+                            onError={() => setImgError(true)} />
                     ) : (
-                        <span className="d-flex align-items-center justify-content-center text-secondary">{relic.name}</span>
+                        <p>Immagine non disponibile</p>
                     )}
                 </div>
             </div>
