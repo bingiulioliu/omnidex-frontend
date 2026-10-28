@@ -1,9 +1,10 @@
 import { NavLink } from "react-router";
-import useTheme from "../hooks/useTheme";
 import { LuSun, LuMoon } from "react-icons/lu";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 function Header() {
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
         <header>
